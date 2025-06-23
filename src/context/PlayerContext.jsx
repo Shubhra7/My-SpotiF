@@ -47,10 +47,29 @@ const PlayerContextProvider = (props) =>{
         setPlayStatus(false);
     }
 
+    // for when click which song in album will play
     const playWithId = async (id)=>{
         await setTrack(songsData[id])
         await audioRef.current.play();
         setPlayStatus(true);
+    }
+
+    // for before play back key
+    const before = async()=>{
+        if(track.id > 0){
+            await setTrack(songsData[track.id - 1])
+            await audioRef.current.play();
+            setPlayStatus(true);
+        }
+    }
+
+    // for after play back key
+    const after = async()=>{
+        if(track.id < songsData.length - 1){
+            await setTrack(songsData[track.id + 1])
+            await audioRef.current.play();
+            setPlayStatus(true);
+        }
     }
 
 
@@ -66,7 +85,9 @@ const PlayerContextProvider = (props) =>{
         setTime,
         play,
         pause,
-        playWithId
+        playWithId,
+        before,
+        after
     }
 
     return (
