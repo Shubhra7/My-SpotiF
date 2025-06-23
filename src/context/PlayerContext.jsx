@@ -72,6 +72,11 @@ const PlayerContextProvider = (props) =>{
         }
     }
 
+    // for changing song time by dragging the line
+    const seekBgClick = async(e)=>{
+        audioRef.current.currentTime = ((e.nativeEvent.offsetX / seekBg.current.offsetWidth) * audioRef.current.duration)
+    }
+
 
     const contextValue = {
         audioRef,
@@ -87,7 +92,8 @@ const PlayerContextProvider = (props) =>{
         pause,
         playWithId,
         before,
-        after
+        after,
+        seekBgClick
     }
 
     return (
